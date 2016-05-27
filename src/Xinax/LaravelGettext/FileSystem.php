@@ -302,7 +302,7 @@ class FileSystem
 
         $localePOPath = implode($data, DIRECTORY_SEPARATOR);
 
-        if (!file_exists($localePOPath) || !$localeContents = file_get_contents($localePOPath)) {
+        if ((!file_exists($localePOPath) && !$this->createPOFile($localePOPath, $locale, $domain)) || !$localeContents = file_get_contents($localePOPath)) {
             throw new LocaleFileNotFoundException(
                 sprintf('Can\'t read %s verify your locale structure', $localePOPath)
             );
